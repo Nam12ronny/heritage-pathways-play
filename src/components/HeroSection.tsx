@@ -11,10 +11,12 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-gradient-subtle">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,theme(colors.primary.light)_0%,transparent_50%)] opacity-20" />
+    <section className="relative overflow-hidden bg-gradient-mesh">
+      {/* Animated Background Pattern */}
+      <div className="absolute inset-0 bg-gradient-animated opacity-40" />
+      <div className="absolute inset-0 opacity-60">
+        <div className="absolute top-20 left-1/4 w-96 h-96 bg-gradient-to-r from-primary/20 to-engagement/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-1/4 w-80 h-80 bg-gradient-to-r from-wellness/20 to-primary-glow/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}} />
       </div>
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
