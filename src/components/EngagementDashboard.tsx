@@ -59,14 +59,14 @@ const EngagementDashboard = () => {
           {/* Main Dashboard */}
           <div className="lg:col-span-2 space-y-6">
             {/* Level Progress Card */}
-            <div className="bg-card rounded-xl p-6 shadow-card border border-border card-interactive">
+            <div className="bg-card rounded-2xl p-8 shadow-card border border-border card-interactive">
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h3 className="text-xl font-semibold text-foreground">Level {parentLevel.current}</h3>
-                  <p className="text-engagement font-medium">{parentLevel.name}</p>
+                  <h3 className="text-2xl font-bold text-foreground">Level {parentLevel.current}</h3>
+                  <p className="text-engagement font-semibold text-lg">{parentLevel.name}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-2xl font-bold text-foreground">{parentLevel.totalPoints}</p>
+                  <p className="text-3xl font-bold text-foreground">{parentLevel.totalPoints}</p>
                   <p className="text-sm text-muted-foreground">Total Points</p>
                 </div>
               </div>
@@ -74,40 +74,40 @@ const EngagementDashboard = () => {
               <div className="space-y-3">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Progress to {parentLevel.nextLevel}</span>
-                  <span className="text-engagement font-medium">{parentLevel.pointsToNext} points to go</span>
+                  <span className="text-engagement font-semibold">{parentLevel.pointsToNext} points to go</span>
                 </div>
-                <Progress value={parentLevel.progress} className="h-3 bg-muted" />
+                <Progress value={parentLevel.progress} className="h-4 bg-muted" />
               </div>
 
-              <Button className="w-full mt-6 bg-gradient-engagement hover:opacity-90 transition-smooth">
+              <Button className="w-full mt-8 bg-gradient-engagement hover:opacity-90 transition-spring text-lg h-12 glow-on-hover">
                 <Plus className="h-4 w-4 mr-2" />
                 Log New Study Session
               </Button>
             </div>
 
             {/* Achievement Badges */}
-            <div className="bg-card rounded-xl p-6 shadow-card border border-border">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Achievement Badges</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="bg-card rounded-2xl p-8 shadow-card border border-border">
+              <h3 className="text-xl font-bold text-foreground mb-6">Achievement Badges</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {badges.map((badge, index) => (
                   <div
                     key={badge.name}
-                    className={`p-4 rounded-lg border text-center transition-smooth ${
+                    className={`p-6 rounded-2xl border text-center transition-spring hover:scale-105 ${
                       badge.earned 
-                        ? 'bg-gradient-engagement border-engagement-light shadow-engagement' 
-                        : 'bg-muted/50 border-border'
+                        ? 'bg-gradient-engagement border-engagement-light shadow-engagement glow-on-hover' 
+                        : 'bg-muted/50 border-border hover:bg-muted/70'
                     }`}
                   >
-                    <badge.icon className={`h-8 w-8 mx-auto mb-2 ${
+                    <badge.icon className={`h-10 w-10 mx-auto mb-3 ${
                       badge.earned ? 'text-engagement-foreground' : 'text-muted-foreground'
                     }`} />
-                    <p className={`text-sm font-medium ${
+                    <p className={`text-sm font-semibold ${
                       badge.earned ? 'text-engagement-foreground' : 'text-muted-foreground'
                     }`}>
                       {badge.name}
                     </p>
                     {badge.earned && (
-                      <Badge variant="secondary" className="mt-2 text-xs">
+                      <Badge variant="secondary" className="mt-3 text-xs">
                         Earned!
                       </Badge>
                     )}
@@ -117,25 +117,25 @@ const EngagementDashboard = () => {
             </div>
 
             {/* Recent Sessions */}
-            <div className="bg-card rounded-xl p-6 shadow-card border border-border">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Recent Study Sessions</h3>
-              <div className="space-y-3">
+            <div className="bg-card rounded-2xl p-8 shadow-card border border-border">
+              <h3 className="text-xl font-bold text-foreground mb-6">Recent Study Sessions</h3>
+              <div className="space-y-4">
                 {recentSessions.map((session, index) => (
                   <div
                     key={index}
-                    className="flex items-center justify-between p-3 rounded-lg bg-accent/50 border border-border"
+                    className="flex items-center justify-between p-4 rounded-xl bg-accent/50 border border-border hover:bg-accent/70 transition-spring card-interactive"
                   >
                     <div className="flex items-center space-x-3">
-                      <div className="p-2 bg-primary-light rounded-lg">
+                      <div className="p-3 bg-primary-light rounded-xl">
                         <Clock className="h-4 w-4 text-primary" />
                       </div>
                       <div>
-                        <p className="font-medium text-foreground">{session.subject}</p>
+                        <p className="font-semibold text-foreground">{session.subject}</p>
                         <p className="text-sm text-muted-foreground">{session.duration} • {session.date}</p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="font-bold text-engagement">+{session.points}</p>
+                      <p className="font-bold text-engagement text-lg">+{session.points}</p>
                       <p className="text-xs text-muted-foreground">points</p>
                     </div>
                   </div>
@@ -147,41 +147,41 @@ const EngagementDashboard = () => {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Monthly Challenge */}
-            <div className="bg-card rounded-xl p-6 shadow-card border border-border">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Monthly Challenge</h3>
+            <div className="bg-card rounded-2xl p-8 shadow-card border border-border">
+              <h3 className="text-xl font-bold text-foreground mb-6">Monthly Challenge</h3>
               <div className="text-center">
-                <div className="p-4 bg-wellness-light rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center">
-                  <Calendar className="h-8 w-8 text-wellness" />
+                <div className="p-6 bg-wellness-light rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center micro-bounce">
+                  <Calendar className="h-10 w-10 text-wellness" />
                 </div>
-                <h4 className="font-semibold text-foreground mb-2">Study Streak Master</h4>
-                <p className="text-sm text-muted-foreground mb-4">
+                <h4 className="font-bold text-foreground mb-3 text-lg">Study Streak Master</h4>
+                <p className="text-sm text-muted-foreground mb-6">
                   Complete 20 study sessions this month
                 </p>
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
                     <span>Progress</span>
-                    <span className="text-wellness font-medium">14/20</span>
+                    <span className="text-wellness font-semibold">14/20</span>
                   </div>
-                  <Progress value={70} className="h-2 bg-muted" />
+                  <Progress value={70} className="h-3 bg-muted" />
                 </div>
               </div>
             </div>
 
             {/* Leaderboard */}
-            <div className="bg-card rounded-xl p-6 shadow-card border border-border">
-              <h3 className="text-lg font-semibold text-foreground mb-4">Parent Leaderboard</h3>
-              <div className="space-y-3">
+            <div className="bg-card rounded-2xl p-8 shadow-card border border-border">
+              <h3 className="text-xl font-bold text-foreground mb-6">Parent Leaderboard</h3>
+              <div className="space-y-4">
                 {leaderboard.map((parent) => (
                   <div
                     key={parent.rank}
-                    className={`flex items-center space-x-3 p-3 rounded-lg transition-smooth ${
+                    className={`flex items-center space-x-3 p-4 rounded-xl transition-spring hover:scale-105 ${
                       parent.isUser 
-                        ? 'bg-engagement-light border border-engagement' 
-                        : 'bg-accent/50'
+                        ? 'bg-engagement-light border border-engagement shadow-engagement' 
+                        : 'bg-accent/50 hover:bg-accent/70'
                     }`}
                   >
                     <div className="flex items-center space-x-3 flex-1">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold ${
                         parent.rank === 1 ? 'bg-yellow-500 text-white' :
                         parent.rank === 2 ? 'bg-gray-400 text-white' :
                         parent.rank === 3 ? 'bg-amber-600 text-white' :
@@ -189,16 +189,16 @@ const EngagementDashboard = () => {
                       }`}>
                         {parent.rank}
                       </div>
-                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-sm font-bold">
+                      <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center text-primary-foreground text-sm font-bold">
                         {parent.avatar}
                       </div>
-                      <span className={`font-medium ${
+                      <span className={`font-semibold ${
                         parent.isUser ? 'text-engagement' : 'text-foreground'
                       }`}>
                         {parent.name}
                       </span>
                     </div>
-                    <span className="font-bold text-engagement">{parent.points}</span>
+                    <span className="font-bold text-engagement text-lg">{parent.points}</span>
                   </div>
                 ))}
               </div>
