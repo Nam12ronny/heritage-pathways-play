@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Link, useLocation } from 'react-router-dom';
 import { 
   BookOpen, 
   Users, 
@@ -7,19 +8,32 @@ import {
   Heart, 
   Calendar,
   Menu,
-  X 
+  X,
+  Brain,
+  BarChart3,
+  Star,
+  Globe,
+  Wallet,
+  PenTool,
+  GraduationCap
 } from 'lucide-react';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
   const navItems = [
-    { label: 'Dashboard', icon: BookOpen, href: '#dashboard' },
-    { label: 'Engagement', icon: Award, href: '#engagement' },
-    { label: 'Classroom Moments', icon: Calendar, href: '#moments' },
-    { label: 'Wellness', icon: Heart, href: '#wellness' },
-    { label: 'Skills', icon: Users, href: '#skills' },
+    { label: 'Home', icon: BookOpen, href: '/' },
+    { label: 'AI Homework', icon: Brain, href: '/homework-assistant' },
+    { label: 'Smart Dashboard', icon: BarChart3, href: '/smart-dashboard' },
+    { label: 'Talent Tracker', icon: Star, href: '/talent-tracker' },
+    { label: 'Languages', icon: Globe, href: '/local-language' },
+    { label: 'School Wallet', icon: Wallet, href: '/school-wallet' },
+    { label: 'Future Journal', icon: PenTool, href: '/future-journal' },
+    { label: 'Student Portal', icon: GraduationCap, href: '/student-portal' },
   ];
+
+  const isActive = (href: string) => location.pathname === href;
 
   return (
     <nav className="bg-card/95 backdrop-blur-md border-b border-border sticky top-0 z-50 shadow-card">
@@ -41,19 +55,23 @@ const Navigation = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center md:space-x-1">
+          <div className="hidden lg:flex lg:items-center lg:space-x-1">
             {navItems.map((item) => (
               <Button
                 key={item.label}
                 variant="ghost"
                 size="sm"
-                className="text-muted-foreground hover:text-foreground hover:bg-accent transition-smooth"
+                className={`transition-smooth ${
+                  isActive(item.href) 
+                    ? 'text-primary bg-primary/10' 
+                    : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+                }`}
                 asChild
               >
-                <a href={item.href} className="flex items-center space-x-2">
+                <Link to={item.href} className="flex items-center space-x-2">
                   <item.icon className="h-4 w-4" />
-                  <span>{item.label}</span>
-                </a>
+                  <span className="text-xs">{item.label}</span>
+                </Link>
               </Button>
             ))}
             
@@ -69,7 +87,7 @@ const Navigation = () => {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
+          <div className="lg:hidden flex items-center">
             <Button
               variant="ghost"
               size="sm"
@@ -87,19 +105,24 @@ const Navigation = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-border bg-card">
+          <div className="lg:hidden border-t border-border bg-card">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item) => (
                 <Button
                   key={item.label}
                   variant="ghost"
-                  className="w-full justify-start text-muted-foreground hover:text-foreground hover:bg-accent transition-smooth"
+                  className={`w-full justify-start transition-smooth ${
+                    isActive(item.href) 
+                      ? 'text-primary bg-primary/10' 
+                      : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+                  }`}
                   asChild
+                  onClick={() => setIsMenuOpen(false)}
                 >
-                  <a href={item.href} className="flex items-center space-x-2">
+                  <Link to={item.href} className="flex items-center space-x-2">
                     <item.icon className="h-4 w-4" />
                     <span>{item.label}</span>
-                  </a>
+                  </Link>
                 </Button>
               ))}
               <div className="pt-2">
